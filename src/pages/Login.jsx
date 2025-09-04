@@ -12,7 +12,7 @@ function Login() {
    async function handleSubmit(e) {
     e.preventDefault();
     try {
-        const login = await fetch('http://localhost:3333/user/login', {
+        const login = await fetch('https://mobilemed-backend.onrender.com/user/login', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
@@ -33,7 +33,7 @@ function Login() {
             // Fetch all users with token
             const token = localStorage.getItem("authToken");
 
-            const details = await fetch("http://localhost:3333/user/me", {
+            const details = await fetch("https://mobilemed-backend.onrender.com/user/me", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
