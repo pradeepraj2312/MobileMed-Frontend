@@ -15,6 +15,8 @@ import Settings from './pages/settings';
 import AdminDashboard from './pages/admainDashboard';
 import DoctorDashboard from './pages/doctorDashboard';
 import WorkerDashboard from './pages/workerDashboard';
+import AddPatientForm from './components/Addpatient';
+
 
 
 function AppLayout() {
@@ -42,6 +44,7 @@ function AppLayout() {
             <Route path='/patients' element={<Patients/>}/>
             <Route path='/vitals' element={<Vitals/>}/>
             <Route path='/settings' element={<Settings/>}/>
+            <Route path='/addpatient' element={<AddPatientForm/>}/>
           </Routes> 
         </AnimatePresence>
       </div>
