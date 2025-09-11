@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import InputField from "./inputfield";
-import SelectField from "./selectfield";
-import TextAreaField from "./textareafield";
+import InputField from "../components/inputfield";
+import SelectField from "../components/selectfield";
+import TextAreaField from "../components/textareafield";
 
 const AddPatientForm= () => {
   const [form, setForm] = useState({

@@ -9,14 +9,13 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/dashbord'; 
 import './App.css';
 import Queue from './pages/queue';
-import Patients from './pages/patients';
 import Vitals from './pages/vitals';
 import Settings from './pages/settings';
 import AdminDashboard from './pages/admainDashboard';
 import DoctorDashboard from './pages/doctorDashboard';
 import WorkerDashboard from './pages/workerDashboard';
-import AddPatientForm from './components/Addpatient';
-
+import AddPatientForm from './pages/Addpatient';
+import RecordVitals from './pages/recordvitals';
 
 
 function AppLayout() {
@@ -41,10 +40,11 @@ function AppLayout() {
             <Route path="/admindashboard" element={<AdminDashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path='/queue' element={<Queue/>}/>
-            <Route path='/patients' element={<Patients/>}/>
             <Route path='/vitals' element={<Vitals/>}/>
             <Route path='/settings' element={<Settings/>}/>
-            <Route path='/addpatient' element={<AddPatientForm/>}/>
+            <Route path='/patients' element={<AddPatientForm/>}/>
+            <Route path="/recordvitals" element={<RecordVitals />} />
+           
           </Routes> 
         </AnimatePresence>
       </div>
