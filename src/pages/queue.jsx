@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/navbar";
+import { useNavigate } from "react-router-dom";
 
 
 function QueueManagement() {
@@ -12,6 +13,7 @@ function QueueManagement() {
     { id: 77889, name: "Mia Rodriguez", lastUpdated: "11:01 AM" },
   ];
 
+  const navigate = useNavigate();
   return (
     <div className="queue-page">
       {/* Sidebar Navbar */}
@@ -20,7 +22,7 @@ function QueueManagement() {
       {/* Main Content */}
       <div className="main-content">
         <div className="queue-header">
-          <h2>Patient Vitals</h2>
+          <h2>Queue</h2>
           <div className="queue-actions">
             <button className="btn btn-primary">Manage Queue</button>
             <button className="btn btn-outline">Refresh</button>
@@ -43,7 +45,30 @@ function QueueManagement() {
                 <td>{p.id}</td>
                 <td>{p.lastUpdated}</td>
                 <td>
-                  <button className="btn btn-primary">View Details</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() =>
+                      navigate("/patientdetails", {
+                        state: {
+                          patient: {
+                            name: p.name,
+                            age: 32, // demo static
+                            gender: "Female", // demo static
+                            contact: "+1-555-123-4567", // demo static
+                            language: "English", // demo static
+                            symptoms: "Fever, cough, fatigue", // demo static
+                            bloodType: "O+",
+                            bloodPressure: "120/80 mmHg",
+                            bloodSugar: "90 mg/dL",
+                            weight: "65 kg",
+                            height: "170 cm",
+                          },
+                        },
+                      })
+                    }
+                  >
+                    View Details
+                  </button>
                   <button className="btn btn-outline">Update</button>
                 </td>
               </tr>

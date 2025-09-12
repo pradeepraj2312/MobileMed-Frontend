@@ -15,7 +15,9 @@ import AdminDashboard from './pages/admainDashboard';
 import DoctorDashboard from './pages/doctorDashboard';
 import WorkerDashboard from './pages/workerDashboard';
 import AddPatientForm from './pages/Addpatient';
+
 import RecordVitals from './pages/recordvitals';
+const PatientDetails = React.lazy(() => import('./pages/patientdetails'));
 
 
 function AppLayout() {
@@ -45,6 +47,7 @@ function AppLayout() {
             <Route path='/patients' element={<AddPatientForm/>}/>
             <Route path="/recordvitals" element={<RecordVitals />} />
            
+            <Route path="/patientdetails" element={<React.Suspense fallback={<div>Loading...</div>}><PatientDetails /></React.Suspense>} />
           </Routes> 
         </AnimatePresence>
       </div>
