@@ -2,14 +2,15 @@ import React, { useContext } from 'react';
 import Navbar from '../components/navbar';
 import { UserContext } from '../context/UserContext';
 import { FaMapMarkerAlt, FaUsers, FaCheckCircle } from 'react-icons/fa';
+import DoctorSidebar from '../components/DoctorSidebar';
 
-function DoctorDashboard() {
+function Doctor() {
   const { user } = useContext(UserContext);
   const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
     <div className="dashboard-page">
-      <Navbar />
+      <DoctorSidebar user={user} />
       <div className="main-content dashboard-main-content">
         <div className="dashboard-header-row">
           <div>
@@ -88,4 +89,4 @@ function DoctorDashboard() {
   );
 }
 
-export default DoctorDashboard;
+export default Doctor;

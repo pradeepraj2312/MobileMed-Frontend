@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputField from "../components/inputfield";
 import SelectField from "../components/selectfield";
 import TextAreaField from "../components/textareafield";
@@ -18,10 +19,18 @@ const AddPatientForm= () => {
     setForm({ ...form, [field]: e.target.value });
   };
 
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Patient Record Submitted:", form);
+    // Check if all fields are filled
+    const allFilled = Object.values(form).every((val) => val !== "" && val !== null && val !== undefined);
+    if (!allFilled) {
+      alert("Please fill in all patient details before submitting.");
+      return;
+    }
     // TODO: connect with backend API
+    alert("Patient record added!");
+    navigate(0); // reloads the current page
   };
 
   const formFields = [

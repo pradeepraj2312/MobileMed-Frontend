@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const RecordVitals = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { patient } = location.state || {};
 
   const [formData, setFormData] = useState({
@@ -20,7 +21,15 @@ const RecordVitals = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Vitals Saved for:", patient?.name, formData);
+    // Check if all fields are filled
+    const allFilled = Object.values(formData).every((val) => val !== "" && val !== null && val !== undefined);
+    if (!allFilled) {
+      alert("Please fill in all vital details before submitting.");
+      return;
+    }
+    // TODO: connect with backend API
+    alert("Vitals record added!");
+    navigate("/vitals");
   };
 
   return (

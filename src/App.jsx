@@ -15,21 +15,23 @@ import AdminDashboard from './pages/admainDashboard';
 import DoctorDashboard from './pages/doctorDashboard';
 import WorkerDashboard from './pages/workerDashboard';
 import AddPatientForm from './pages/Addpatient';
-
+import PatientDetails from './pages/patientdetails';
 import RecordVitals from './pages/recordvitals';
-const PatientDetails = React.lazy(() => import('./pages/patientdetails'));
+import Doctor from './pages/doctor';
+import PatientDetailsList from './pages/PatientDetailsList';
+import Report from './pages/Report';
 
 
 function AppLayout() {
   const location = useLocation();
 
   // Define routes where Navbar should be hidden
-  const hideNavbarRoutes = ['/', '/landing', '/landing/login', '/landing/signup'];
+  const hideNavbarRoutes = ['/', '/landing', '/landing/login', '/landing/signup', '/doctor', '/report', '/patientdetails'];
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
     <div className="app">
-      <Navbar />
+      {!shouldHideNavbar && <Navbar />}
       <div className={`main-content ${shouldHideNavbar ? 'full-width' : ''}`}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
@@ -45,9 +47,12 @@ function AppLayout() {
             <Route path='/vitals' element={<Vitals/>}/>
             <Route path='/settings' element={<Settings/>}/>
             <Route path='/patients' element={<AddPatientForm/>}/>
+            <Route path='/report' element={<Report/>}/>
             <Route path="/recordvitals" element={<RecordVitals />} />
-           
-            <Route path="/patientdetails" element={<React.Suspense fallback={<div>Loading...</div>}><PatientDetails /></React.Suspense>} />
+            <Route path="/doctor" element={<Doctor />} />
+            <Route path="/patientdetails" element={<PatientDetailsList />} />
+            <Route path="/details" element={<PatientDetails />} />
+            
           </Routes> 
         </AnimatePresence>
       </div>

@@ -1,4 +1,3 @@
-
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
@@ -49,7 +48,7 @@ function Login() {
                 navigate('/workerdashboard')
             }
             if(users.role === "Doctor"){
-                navigate('/doctordashboard')
+                navigate('/doctor')
             }
             if(users.role === "Admin"){
                 navigate('/admindashboard')
