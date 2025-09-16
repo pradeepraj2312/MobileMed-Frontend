@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import { useNavigate } from "react-router-dom";
-
+import './StyleSheet/queue.css'
 
 function QueueManagement() {
   // sample patients (replace with API data later)
@@ -32,12 +32,7 @@ function QueueManagement() {
   };
 
   return (
-    <div className="queue-page">
-      {/* Sidebar Navbar */}
-      <Navbar />
-
-      {/* Main Content */}
-      <div className="main-content">
+      <div>
         <div className="queue-header">
           <h2>Queue</h2>
           <div className="queue-actions">
@@ -117,7 +112,7 @@ function QueueManagement() {
           </tbody>
         </table>
       </div>
-    </div>
+   
   );
 }
 

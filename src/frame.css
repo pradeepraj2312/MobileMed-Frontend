@@ -1,0 +1,32 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.app-content {
+  flex: 1;
+  padding: 24px;
+  transition: margin-left 0.3s ease;
+  margin-left: 240px;
+}
+
+.navbar-container.collapsed ~ .app-content {
+  margin-left: 80px;
+}
+
+.navbar-container.mobile ~ .app-content {
+  margin-left: 0;
+}
+
+.navbar-container.mobile.mobile-open ~ .app-content {
+  margin-left: 240px;
+}
+
+@media (max-width: 768px) {
+  .app-content {
+    margin-left: 0;
+    padding: 16px;
+  }
+}

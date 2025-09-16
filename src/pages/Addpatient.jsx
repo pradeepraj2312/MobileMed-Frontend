@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import InputField from "../components/inputfield";
 import SelectField from "../components/selectfield";
 import TextAreaField from "../components/textareafield";
-
+import './StyleSheet/addPatients.css'
 const AddPatientForm= () => {
   const [form, setForm] = useState({
     fullName: "",

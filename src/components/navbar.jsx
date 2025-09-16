@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react';
+
+import '../pages/StyleSheet/navbar.css'
+import React, { useContext, useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import logo1 from '../assets/image/logo1.png';
-import { FaThLarge, FaUserInjured, FaHeartbeat, FaListAlt, FaSignOutAlt, FaBars } from 'react-icons/fa';
+import { FaThLarge, FaUserInjured, FaHeartbeat, FaListAlt, FaSignOutAlt, FaBars, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { UserContext } from '../context/UserContext';
 
 
@@ -9,6 +11,29 @@ function Navbar() {
   const { user } = useContext(UserContext);
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Handle window resize for responsiveness
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      
+      // Auto-collapse on mobile
+      if (mobile) {
+        setCollapsed(true);
+      } else {
+        setMobileOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Set active menu based on current route
   const getActiveMenu = () => {
     if (location.pathname.startsWith('/queue') || location.pathname.startsWith('/patientdetails')) return 'Queue';
@@ -17,12 +42,16 @@ function Navbar() {
     if (location.pathname.startsWith('/vitals')) return 'Vitals';
     return '';
   };
-  const [isActive, setIsActive] = React.useState(getActiveMenu());
+  
+  const [isActive, setIsActive] = useState(getActiveMenu());
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsActive(getActiveMenu());
-    // eslint-disable-next-line
-  }, [location.pathname]);
+    // Close mobile menu when navigating
+    if (isMobile) {
+      setMobileOpen(false);
+    }
+  }, [location.pathname, isMobile]);
 
   // Define routes where Navbar should be hidden
   const hideNavbarRoutes = ['/', '/landing', '/landing/login', '/landing/signup'];
@@ -40,44 +69,81 @@ function Navbar() {
     setIsActive(itemId);
   };
 
+  const toggleNavbar = () => {
+    if (isMobile) {
+      setMobileOpen(!mobileOpen);
+    } else {
+      setCollapsed(!collapsed);
+    }
+  };
+
   // Don't render navbar on specific routes
   if (shouldHideNavbar) {
     return null;
   }
 
   return (
-    <div className={`navbar-container${collapsed ? ' collapsed' : ''}`} style={{ background: 'linear-gradient(180deg, #3b82f6 0%, #1e3a8a 100%)', color: '#fff', minHeight: '100vh' }}> 
-      <div className="user-info">
-        <div className="clinic-logo" onClick={() => setCollapsed((prev) => !prev)} style={{ cursor: 'pointer', paddingLeft: collapsed ? 8 : 18 }}>
-          <img src={logo1} alt="MobileMed Logo" className="logo-img" style={{ marginRight: collapsed ? 0 : 10 }} />
-          <span className="clinic-name" style={{ fontSize: collapsed ? '1.5rem' : '2.2rem', fontWeight: 700, marginLeft: collapsed ? 0 : 10, display: collapsed ? 'none' : 'inline' }}>MobileMed</span>
-        </div>
-        {!collapsed && (
-          <div className="user-details">
-            <div className="user-role">{user && user.userRole ? user.userRole : "Role"}</div>
-            <div className="doctor-name">{user && user.userName ? `Dr. ${user.userName}` : "Dr. Emily Carter"}</div>
-            <div className="doctor-title">Medical Camp {user && user.userRole ? user.userRole : "Worker"}</div>
+    <>
+      {/* Mobile hamburger menu button */}
+      {isMobile && (
+        <button 
+          className="mobile-toggle-btn"
+          onClick={toggleNavbar}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      )}
+      
+      {/* Overlay for mobile when menu is open */}
+      {isMobile && mobileOpen && (
+        <div 
+          className="navbar-overlay"
+          onClick={() => setMobileOpen(false)}
+        ></div>
+      )}
+      
+      <div 
+        className={`navbar-container${collapsed ? ' collapsed' : ''}${isMobile ? ' mobile' : ''}${mobileOpen ? ' mobile-open' : ''}`}
+      > 
+        <button className="toggle-btn" onClick={toggleNavbar} aria-label="Toggle sidebar">
+          {collapsed ? <FaChevronRight /> : <FaChevronLeft />}
+        </button>
+        
+        <div className="user-info">
+          <div className="clinic-logo" onClick={() => !isMobile && setCollapsed(prev => !prev)}>
+            <img src={logo1} alt="MobileMed Logo" className="logo-img" />
+            <span className="clinic-name">MobileMed</span>
           </div>
-        )}
+          {!collapsed && (
+            <div className="user-details">
+              <div className="user-role">{user && user.userRole ? user.userRole : "Role"}</div>
+              <div className="doctor-name">{user && user.userName ? `Dr. ${user.userName}` : "Dr. Emily Carter"}</div>
+              <div className="doctor-title">Medical Camp {user && user.userRole ? user.userRole : "Worker"}</div>
+            </div>
+          )}
+        </div>
+        
+        <nav className="navbar">
+          <ul className="nav-menu">
+            {menuItems.map((item, index) => (
+              <li
+                key={item.id}
+                className={`nav-item ${isActive === item.id ? 'active' : ''}`}
+                onClick={() => handleItemClick(item.id)}
+                style={{ animationDelay: `${index * 0.05 + 0.05}s` }}
+              >
+                <Link to={item.path} className="nav-link">
+                  <span className="nav-icon">{item.icon}</span>
+                  <span className="nav-label">{item.label}</span>
+                </Link>
+                {collapsed && <span className="tooltip">{item.label}</span>}
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-      <nav className="navbar">
-        <ul className="nav-menu" style={{ gap: collapsed ? '10px' : '18px', background: 'transparent' }}>
-          {menuItems.map((item) => (
-            <li
-              key={item.id}
-              className={`nav-item ${isActive === item.id ? 'active' : ''}`}
-              onClick={() => handleItemClick(item.id)}
-              style={{ padding: collapsed ? '12px 10px' : '12px 24px', display: 'flex', justifyContent: collapsed ? 'center' : 'flex-start', background: 'transparent' }}
-            >
-              <Link to={item.path} className="nav-link">
-                <span className="nav-icon">{item.icon}</span>
-                {!collapsed && <span className="nav-label">{item.label}</span>}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+    </>
   );
 }
 

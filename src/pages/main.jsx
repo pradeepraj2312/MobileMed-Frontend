@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import logo1 from '../assets/image/logo1.png'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import './StyleSheet/App.css'
 import { useEffect } from 'react';
 
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DoctorSidebar from "../components/DoctorSidebar";
-import "../App.css";
+import "./StyleSheet/patientdetialslist.css";
 
 // Dummy data for demonstration
 const dummyPatients = [
@@ -23,7 +23,7 @@ const PatientDetailsList = () => {
 
   return (
     <div className="dashboard-page">
-      <DoctorSidebar active="patients" />
+     
       <div className="dashboard-main-content patient-details-list-page">
         <div className="patient-details-list-header">
           <h2>Patient Details Queue</h2>

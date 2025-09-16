@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-
+import './StyleSheet/App.css'
 function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -11,7 +11,7 @@ function Login() {
    async function handleSubmit(e) {
     e.preventDefault();
     try {
-        const login = await fetch('https://mobilemed-backend.onrender.com/user/login', {
+        const login = await fetch('http://localhost:3333/user/login', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
@@ -32,7 +32,7 @@ function Login() {
             // Fetch all users with token
             const token = localStorage.getItem("authToken");
 
-            const details = await fetch("https://mobilemed-backend.onrender.com/user/me", {
+            const details = await fetch("http://localhost:3333/user/me", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

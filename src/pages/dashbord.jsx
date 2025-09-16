@@ -10,7 +10,7 @@ import {
   FaCalendarDay
 } from 'react-icons/fa';
 import { UserContext } from '../context/UserContext';
-// import './Dashboard.css';
+import './StyleSheet/worker.css'
 
 function Dashboard() {
   const { user } = useContext(UserContext);

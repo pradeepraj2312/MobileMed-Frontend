@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-
+import './StyleSheet/App.css'
 function Signup() {
   const [role, setRole] = useState("")
   const [name, setName] = useState("")
@@ -11,7 +11,7 @@ function Signup() {
   async function handleSubmit(i) {
     i.preventDefault()
     try {
-      const signupPost = await fetch('https://mobilemed-backend.onrender.com/user/signup',
+      const signupPost = await fetch('http://localhost:3333/user/signup',
         {
           method: "POST",
           headers: { "Content-type": "application/json" },

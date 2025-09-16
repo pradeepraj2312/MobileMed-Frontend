@@ -1,47 +1,122 @@
-
-import React, { useContext } from "react";
-import { FaTachometerAlt, FaUserMd, FaCalendarAlt, FaSignOutAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { FaTachometerAlt, FaUserMd, FaSignOutAlt, FaChevronLeft, FaChevronRight, FaBars, FaTimes } from "react-icons/fa";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import logo1 from "../assets/image/logo1.png";
-import "../App.css";
+import "../pages/StyleSheet/navbar.css";
 
-const DoctorSidebar = ({ active, onNavigate }) => {
-  const navigate = useNavigate();
+const DoctorSidebar = () => {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleNav = (route) => {
-    if (onNavigate) onNavigate(route);
-    navigate(route);
+  const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setCollapsed(true);
+      } else {
+        setMobileOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const getActiveMenu = () => {
+    if (location.pathname.startsWith("/doctor")) return "dashboard";
+    if (location.pathname.startsWith("/patientdetails")) return "patients";
+    return "";
+  };
+
+  const [isActive, setIsActive] = useState(getActiveMenu());
+
+  useEffect(() => {
+    setIsActive(getActiveMenu());
+    if (isMobile) {
+      setMobileOpen(false);
+    }
+  }, [location.pathname, isMobile]);
+
+  const menuItems = [
+    { id: "dashboard", icon: <FaTachometerAlt />, label: "Dashboard", path: "/doctordashboard" },
+    { id: "patients", icon: <FaUserMd />, label: "Patient Details", path: "/patientdetails" },
+    { id: "logout", icon: <FaSignOutAlt />, label: "Logout", path: "/login" },
+  ];
+
+  const handleItemClick = (itemId) => {
+    setIsActive(itemId);
+  };
+
+  const toggleSidebar = () => {
+    if (isMobile) {
+      setMobileOpen(!mobileOpen);
+    } else {
+      setCollapsed(!collapsed);
+    }
   };
 
   return (
-    <aside className="doctor-sidebar doctor-navbar-gradient">
-      <div>
-        <div className="doctor-sidebar-header doctor-sidebar-logo-row">
-          <img src={logo1} alt="MobileMed Logo" className="doctor-logo-img" />
-          <span className="doctor-clinic-name">MobileMed</span>
-        </div>
-        <div className="doctor-sidebar-header">
-          <div className="doctor-avatar" />
-          <div className="doctor-info">
-            <span className="doctor-name">{user && user.userName ? `Dr. ${user.userName}` : "Dr. Emily Carter"}</span>
-            <span className="doctor-role">{user && user.userRole ? user.userRole : "Doctor"}</span>
-            <a href="#" className="doctor-profile-link">View Profile</a>
-          </div>
-        </div>
-        <nav className="doctor-sidebar-nav">
-          <ul>
-            <li className={active === "dashboard" ? "active" : ""} onClick={() => handleNav("/doctor")}> <FaTachometerAlt className="sidebar-icon" /> Dashboard </li>
-            <li className={active === "patients" ? "active" : ""} onClick={() => handleNav("/patientdetails")}> <FaUserMd className="sidebar-icon" /> Patient Details </li>
+    <>
+      {isMobile && (
+        <button className="mobile-toggle-btn" onClick={toggleSidebar} aria-label="Toggle menu">
+          {mobileOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      )}
 
+      {isMobile && mobileOpen && (
+        <div className="navbar-overlay" onClick={() => setMobileOpen(false)}></div>
+      )}
+
+      <div
+        className={`navbar-container${collapsed ? " collapsed" : ""}${isMobile ? " mobile" : ""}${mobileOpen ? " mobile-open" : ""}`}
+      >
+        <button className="toggle-btn" onClick={toggleSidebar} aria-label="Toggle sidebar">
+          {collapsed ? <FaChevronRight /> : <FaChevronLeft />}
+        </button>
+
+        <div className="user-info">
+          <div className="clinic-logo" onClick={() => !isMobile && setCollapsed((prev) => !prev)}>
+            <img src={logo1} alt="MobileMed Logo" className="logo-img" />
+            <span className="clinic-name">MobileMed</span>
+          </div>
+          {!collapsed && (
+            <div className="user-details">
+              <div className="user-role">{user?.userRole || "Doctor"}</div>
+              <div className="doctor-name">{user?.userName ? `Dr. ${user.userName}` : "Dr. Emily Carter"}</div>
+              <div className="doctor-title">Medical Camp {user?.userRole || "Worker"}</div>
+            </div>
+          )}
+        </div>
+
+        <nav className="navbar">
+          <ul className="nav-menu">
+            {menuItems.map((item, index) => (
+              <li
+                key={item.id}
+                className={`nav-item ${isActive === item.id ? "active" : ""}`}
+                onClick={() => handleItemClick(item.id)}
+                style={{ animationDelay: `${index * 0.05 + 0.05}s` }}
+              >
+                <Link to={item.path} className="nav-link">
+                  <span className="nav-icon">{item.icon}</span>
+                  <span className="nav-label">{item.label}</span>
+                </Link>
+                {collapsed && <span className="tooltip">{item.label}</span>}
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
-      <div className="doctor-sidebar-footer">
-        <a className="doctor-logout-link" href="/login"> <FaSignOutAlt /> Logout </a>
-      </div>
-    </aside>
+    </>
   );
 };
 

@@ -1,0 +1,114 @@
+
+
+
+/* Default sidebar width */
+.navbar-container {
+  width: 240px;
+}
+
+
+
+
+/* Header Section */
+.queue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.queue-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.queue-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-outline {
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #1e293b;
+}
+
+.btn-outline:hover {
+  background: #f1f5f9;
+}
+
+.btn-sm {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+/* Queue Table */
+.queue-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.queue-table th,
+.queue-table td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.queue-table th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+}
+
+.queue-table tr:hover {
+  background: #f9fafb;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .queue-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .queue-actions {
+    flex-wrap: wrap;
+  }
+
+  .queue-table th,
+  .queue-table td {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

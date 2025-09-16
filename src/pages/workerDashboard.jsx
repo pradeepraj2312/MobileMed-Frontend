@@ -47,8 +47,7 @@ function WorkerDashboard() {
               <h3>Current Location</h3>
               <p>Camp Alpha</p>
             </div>
-          </div>
-          
+          </div>          
           <div className="overview-card">
             <div className="card-icon">
               <FaUserInjured />
@@ -60,7 +59,6 @@ function WorkerDashboard() {
           </div>
         </div>
       </section>
-
       <section className="tasks-section">
         <h2>Tasks</h2>
         <div className="tasks-list">

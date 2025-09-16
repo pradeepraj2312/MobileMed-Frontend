@@ -4,6 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 import logo1 from '../assets/image/logo1.png'
+import './StyleSheet/App.css'
 // import { motion } from 'framer-motion';
 
 // const pageVariants = {
