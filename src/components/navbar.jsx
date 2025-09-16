@@ -28,7 +28,7 @@ function Navbar({ onToggleCollapse }){
   const [isCollapsed, setIsCollapsed] = useState(false);
   
   // Define routes where Navbar should be hidden
-  const hideNavbarRoutes = ['/', '/landing', '/landing/login', '/landing/signup'];
+  const hideNavbarRoutes = ['/', '/landing', '/landing/login', '/landing/signup','/workers','/addworker','/doctors'];
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
   
   const menuItems = [
