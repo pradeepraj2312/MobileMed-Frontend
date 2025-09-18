@@ -18,7 +18,8 @@ import Workers from './pages/workers';
 import AddWorker from "./pages/addworker";
 import AddDoctor from './pages/adddoctor';
 import Doctors from "./pages/doctors";
-import DiseaseAnalytics from "./pages/diseaseanalytics";
+import DiseaseAnalytics from "./pages/DiseaseAnalytics";
+import Addpatient from './pages/Addpatient';
 
 
 import AdminDashboard from './pages/admainDashboard';
@@ -67,7 +68,7 @@ function AppLayout() {
             
             {/* Other Pages */}
             <Route path="/queue" element={<Queue />} />
-            <Route path="/patients" element={<Patients />} />
+            <Route path="/patients" element={<Addpatient />} />
             <Route path="/vitals" element={<Vitals />} />
             <Route path="/settings" element={<Settings />} />
 
