@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DoctorSidebar from "../components/DoctorSidebar";
 import "./StyleSheet/patientdetialslist.css";
+import { usePatients } from "../context/usePatients";
 
 // Dummy data for demonstration
-const dummyPatients = [
-  { id: "P001", name: "John Doe" },
-  { id: "P002", name: "Jane Smith" },
-  { id: "P003", name: "Alice Johnson" },
-];
+// const dummyPatients = [
+//   { id: "P001", name: "John Doe" },
+//   { id: "P002", name: "Jane Smith" },
+//   { id: "P003", name: "Alice Johnson" },
+// ];
 
 
 const PatientDetailsList = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
-  const filteredPatients = dummyPatients.filter(
-    (p) =>
-      p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.id.toLowerCase().includes(search.toLowerCase())
-  );
+  const { patients } = usePatients();
+  const filteredPatients = patients && Array.isArray(patients)
+    ? patients.filter(
+        (p) =>
+          p.name.toLowerCase().includes(search.toLowerCase()) ||
+          p.id.toLowerCase().includes(search.toLowerCase())
+      )
+    : [];
 
   return (
     <div className="dashboard-page">
@@ -46,13 +49,13 @@ const PatientDetailsList = () => {
             </thead>
             <tbody>
               {filteredPatients.map((patient, idx) => (
-                <tr key={patient.id}>
+                <tr key={patient._id}>
                   <td>{patient.name}</td>
-                  <td>{patient.id}</td>
+                  <td>{patient._id}</td>
                   <td>
                     <button
                       className="report-btn"
-                      onClick={() => navigate(`/report?id=${patient.id}`)}
+                      onClick={() => navigate(`/report?id=${patient._id}`)}
                     >
                       Report
                     </button>

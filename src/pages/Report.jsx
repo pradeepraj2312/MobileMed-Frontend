@@ -1,99 +1,182 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DoctorSidebar from "../components/DoctorSidebar";
+import { usePatients } from "../context/usePatients";
 
 const Report = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
   const patientId = params.get("id");
-
-  const [form, setForm] = useState({
-    patientName: "",
-    dateOfVisit: "",
-    symptoms: "",
-    diagnosis: "",
-    medication: "",
-    dosage: "",
-    frequency: "",
-    duration: "",
-  });
-
+  
+  // const [form, setForm] = useState({
+  //   name: "",
+  //   dateOfVisit: "",
+  //   initialSymptoms: "",
+  //   diagnosis: "",
+  //   medication: "",
+  //   dosage: "",
+  //   frequency: "",
+  //   duration: "",
+  // });
+  const [name, setName] = useState("")
+  const [dateOfVisit, setDateOfVisit] = useState("")
+  const [initialSymptoms, setInitialSymptoms ] = useState("")
+  const [diagnosis,setDiagnosis] = useState("")
+  const [medication,setMedication]= useState("")
+  const [dosage,setDosage] = useState("")
+  const [frequency, setFrequency] = useState("")
+  const [duration,setDuration] = useState("")
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+      case "dateOfVisit":
+        setDateOfVisit(value);
+        break;
+      case "initialSymptoms":
+        setInitialSymptoms(value);
+        break;
+      case "diagnosis":
+        setDiagnosis(value);
+        break;
+      case "medication":
+        setMedication(value);
+        break;
+      case "dosage":
+        setDosage(value);
+        break;
+      case "frequency":
+        setFrequency(value);
+        break;
+      case "duration":
+        setDuration(value);
+        break;
+      default:
+        break;
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: connect with backend API
-    alert("Patient visit log submitted!\n" + JSON.stringify(form, null, 2));
-    // Redirect to PatientDetailsList after success
-    navigate("/patientdetails");
-  };
+  async function handleSubmit(e){
+  e.preventDefault();
 
-  // Dummy patient data
-  const dummyPatient = {
-    id: patientId || 'P001',
-    name: 'Jane Doe',
-    age: 32,
-    gender: 'Female',
-    contact: '+1-555-123-4567',
-    language: 'English',
-    bloodType: 'O+',
-    bloodPressure: '120/80 mmHg',
-    bloodSugar: '90 mg/dL',
-    weight: '65 kg',
-    height: '170 cm',
-    symptoms: 'Fever, cough, fatigue',
+  const formData = {
+    name,
+    dateOfVisit,
+    initialSymptoms,
+    diagnosis,
+    medication,
+    dosage,
+    frequency,
+    duration,
   };
+  try {
+      const response = await fetch(`http://localhost:3333/patient/updatepatient/${patient._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert("Vitals updated successfully!");
+        navigate("/patients");
+      } else {
+        alert(result.message || "Failed to update vitals.");
+      }
+    } catch (error) {
+      console.error("Error updating vitals:", error);
+      alert("Something went wrong. Please try again.");
+    }
+
+  alert("Patient visit log submitted!\n" + JSON.stringify(formData, null, 2));
+  navigate("/patientdetails");
+};
+
+  // // Dummy patient data
+  // const patients = {
+  //   id: patientId || 'P001',
+  //   name: 'Jane Doe',
+  //   age: 32,
+  //   gender: 'Female',
+  //   contact: '+1-555-123-4567',
+  //   language: 'English',
+  //   bloodType: 'O+',
+  //   bloodPressure: '120/80 mmHg',
+  //   bloodSugar: '90 mg/dL',
+  //   weight: '65 kg',
+  //   height: '170 cm',
+  //   initialSymptoms: 'Fever, cough, fatigue',
+  // };
+  const { patients, loading } = usePatients();
+  // Find the patient by id from the array
+  const patient = patients && Array.isArray(patients)
+    ? patients.find((p) => p._id === patientId || p.id === patientId)
+    : null;
 
   return (
     <div className="dashboard-page">
       <DoctorSidebar active="patients" />
-  <div className="dashboard-main-content report-flex-row" style={{ background: '#f7f8fa', minHeight: '100vh', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: 32 }}>
+      <div className="dashboard-main-content report-flex-row" style={{ background: '#f7f8fa', minHeight: '100vh', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: 32 }}>
         {/* Patient Details Card */}
         <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 2px 8px #e5e7eb', width: 320, margin: '40px 0', padding: 28, flexShrink: 0 }}>
           <h3 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: 10 }}>Patient Details</h3>
-          <div style={{ marginBottom: 8 }}><b>Name:</b> {dummyPatient.name}</div>
-          <div style={{ marginBottom: 8 }}><b>Patient ID:</b> {dummyPatient.id}</div>
-          <div style={{ marginBottom: 8 }}><b>Age:</b> {dummyPatient.age}</div>
-          <div style={{ marginBottom: 8 }}><b>Gender:</b> {dummyPatient.gender}</div>
-          <div style={{ marginBottom: 8 }}><b>Contact:</b> {dummyPatient.contact}</div>
-          <div style={{ marginBottom: 8 }}><b>Language:</b> {dummyPatient.language}</div>
-          <div style={{ marginBottom: 8 }}><b>Blood Type:</b> {dummyPatient.bloodType}</div>
-          <div style={{ marginBottom: 8 }}><b>Blood Pressure:</b> {dummyPatient.bloodPressure}</div>
-          <div style={{ marginBottom: 8 }}><b>Blood Sugar:</b> {dummyPatient.bloodSugar}</div>
-          <div style={{ marginBottom: 8 }}><b>Weight:</b> {dummyPatient.weight}</div>
-          <div style={{ marginBottom: 8 }}><b>Height:</b> {dummyPatient.height}</div>
-          <div style={{ marginBottom: 8 }}><b>Symptoms:</b> {dummyPatient.symptoms}</div>
+          {loading ? (
+            <div>Loading...</div>
+          ) : patient ? (
+            <>
+              <div style={{ marginBottom: 8 }}><b>Name:</b> {patient.name}</div>
+              <div style={{ marginBottom: 8 }}><b>Patient ID:</b> {patient._id || patient.id}</div>
+              <div style={{ marginBottom: 8 }}><b>Age:</b> {patient.age}</div>
+              <div style={{ marginBottom: 8 }}><b>Gender:</b> {patient.gender}</div>
+              <div style={{ marginBottom: 8 }}><b>Contact:</b> {patient.contactNumber}</div>
+              <div style={{ marginBottom: 8 }}><b>Language:</b> {patient.language}</div>
+              <div style={{ marginBottom: 8 }}><b>Blood Type:</b> {patient.bloodType}</div>
+              <div style={{ marginBottom: 8 }}><b>Blood Pressure:</b> {patient.bloodPressure}</div>
+              <div style={{ marginBottom: 8 }}><b>Blood Sugar:</b> {patient.bloodSugar}</div>
+              <div style={{ marginBottom: 8 }}><b>Weight:</b> {patient.weight}</div>
+              <div style={{ marginBottom: 8 }}><b>Height:</b> {patient.height}</div>
+              <div style={{ marginBottom: 8 }}><b>Initial Symptoms:</b> {patient.initialSymptoms}</div>
+            </>
+          ) : (
+            <div>No patient found.</div>
+          )}
         </div>
         {/* Report Form */}
         <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 2px 8px #e5e7eb', maxWidth: 600, width: '100%', margin: '40px 0', padding: 36 }}>
           <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: 6 }}>Patient Visit Log</h2>
           <div style={{ color: '#6b7280', marginBottom: 24, fontSize: 16 }}>
-            A digital form for doctors to efficiently log symptoms, diagnoses, and prescribe medications.
+            A digital form for doctors to efficiently log initialSymptoms, diagnoses, and prescribe medications.
           </div>
           <form onSubmit={handleSubmit}>
             <div style={{ fontWeight: 600, marginBottom: 12, fontSize: 17 }}>Patient Information</div>
             <div style={{ display: 'flex', gap: 16, marginBottom: 18 }}>
               <div style={{ flex: 1 }}>
                 <label style={{ fontWeight: 500, fontSize: 15 }}>Patient Name</label>
-                <input
-                  type="text"
-                  name="patientName"
-                  value={form.patientName}
-                  onChange={handleChange}
-                  placeholder="Jane Doe"
-                  style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #e5e7eb', marginTop: 4 }}
-                  required
-                />
+                <div style={{
+                  width: '100%',
+                  padding: 10,
+                  borderRadius: 6,
+                  border: '1px solid #e5e7eb',
+                  marginTop: 4,
+                  background: '#f3f4f6',
+                  minHeight: 38,
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontWeight: 500,
+                  fontSize: 16
+                }}>
+                  {patient ? patient.name : ''}
+                </div>
               </div>
               <div style={{ flex: 1 }}>
                 <label style={{ fontWeight: 500, fontSize: 15 }}>Date of Visit</label>
                 <input
                   type="date"
                   name="dateOfVisit"
-                  value={form.dateOfVisit}
+                  value={dateOfVisit}
                   onChange={handleChange}
                   placeholder="mm/dd/yyyy"
                   style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #e5e7eb', marginTop: 4 }}
@@ -103,14 +186,13 @@ const Report = () => {
             </div>
             <div style={{ fontWeight: 600, marginBottom: 12, fontSize: 17, marginTop: 24 }}>Clinical Details</div>
             <div style={{ marginBottom: 18 }}>
-              <label style={{ fontWeight: 500, fontSize: 15 }}>Symptoms</label>
+              <label style={{ fontWeight: 500, fontSize: 15 }}>initialSymptoms</label>
               <textarea
-                name="symptoms"
-                value={form.symptoms}
+                name="initialSymptoms"
+                value={initialSymptoms}
                 onChange={handleChange}
-                placeholder="Describe the patient's symptoms..."
+                placeholder={patient ? patient.initialSymptoms : ""}
                 style={{ width: '100%', minHeight: 70, padding: 10, borderRadius: 6, border: '1px solid #e5e7eb', marginTop: 4, resize: 'vertical' }}
-                required
               />
             </div>
             <div style={{ marginBottom: 18 }}>
@@ -118,7 +200,7 @@ const Report = () => {
               <input
                 type="text"
                 name="diagnosis"
-                value={form.diagnosis}
+                value={diagnosis}
                 onChange={handleChange}
                 placeholder="e.g. Acute bronchitis"
                 style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #e5e7eb', marginTop: 4 }}
@@ -131,7 +213,7 @@ const Report = () => {
               <input
                 type="text"
                 name="medication"
-                value={form.medication}
+                value={medication}
                 onChange={handleChange}
                 placeholder="e.g. Amoxicillin"
                 style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #e5e7eb', marginTop: 4 }}
@@ -144,7 +226,7 @@ const Report = () => {
                 <input
                   type="text"
                   name="dosage"
-                  value={form.dosage}
+                  value={dosage}
                   onChange={handleChange}
                   placeholder="e.g., 500mg"
                   style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #e5e7eb', marginTop: 4 }}
@@ -156,7 +238,7 @@ const Report = () => {
                 <input
                   type="text"
                   name="frequency"
-                  value={form.frequency}
+                  value={frequency}
                   onChange={handleChange}
                   placeholder="e.g., Twice daily"
                   style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #e5e7eb', marginTop: 4 }}
@@ -168,7 +250,7 @@ const Report = () => {
                 <input
                   type="text"
                   name="duration"
-                  value={form.duration}
+                  value={duration}
                   onChange={handleChange}
                   placeholder="e.g., 7 days"
                   style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #e5e7eb', marginTop: 4 }}

@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './StyleSheet/vitals.css'
+import { usePatients } from "../context/usePatients";
 const Vitals = () => {
   const navigate = useNavigate();
 
-  const [patients] = useState([
-    { id: 12345, name: "Ethan Carter", time: "10:45 AM", addedBy: "Dr. Harper" },
-    { id: 67890, name: "Olivia Bennett", time: "10:42 AM", addedBy: "Dr. Evans" },
-    { id: 24680, name: "Noah Thompson", time: "10:38 AM", addedBy: "Nurse Jackie" },
-    { id: 13579, name: "Sophia Clark", time: "10:35 AM", addedBy: "Dr. Harper" },
-    { id: 97531, name: "Liam Walker", time: "10:31 AM", addedBy: "Dr. Evans" },
-  ]);
-
+  const { patients } = usePatients();
+  // If you want fallback demo data, uncomment below:
+  // const patients = usePatients()?.patients?.length ? usePatients().patients : [
+  //   { id: 12345, name: "Ethan Carter", time: "10:45 AM", addedBy: "Dr. Harper" },
+  //   { id: 67890, name: "Olivia Bennett", time: "10:42 AM", addedBy: "Dr. Evans" },
+  //   { id: 24680, name: "Noah Thompson", time: "10:38 AM", addedBy: "Nurse Jackie" },
+  //   { id: 13579, name: "Sophia Clark", time: "10:35 AM", addedBy: "Dr. Harper" },
+  //   { id: 97531, name: "Liam Walker", time: "10:31 AM", addedBy: "Dr. Evans" },
+  // ];
+  
   const handleRecordVitals = (patient) => {
     navigate("/recordvitals", { state: { patient } });
   };
@@ -36,7 +39,7 @@ const Vitals = () => {
           </thead>
           <tbody>
             {patients.map((patient) => (
-              <tr key={patient.id}>
+              <tr key={patient._id}>
                 <td>{patient.name}</td>
                 <td>{patient.id}</td>
                 <td>{patient.time}</td>

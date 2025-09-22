@@ -9,7 +9,6 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/dashbord';
 import Queue from './pages/queue';
 import Vitals from './pages/vitals';
-import Settings from './pages/settings';
 import AdminDashboard from './pages/admainDashboard';
 import DoctorDashboard from './pages/doctorDashboard';
 import WorkerDashboard from './pages/workerDashboard';
@@ -66,7 +65,7 @@ function AppLayout() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/queue" element={<Queue />} />
               <Route path="/vitals" element={<Vitals />} />
-              <Route path="/settings" element={<Settings />} />
+              
               <Route path="/patients" element={<AddPatientForm />} />
               <Route path="/report" element={<Report />} />
               <Route path="/recordvitals" element={<RecordVitals />} />
