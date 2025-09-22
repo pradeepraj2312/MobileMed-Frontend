@@ -1,34 +1,72 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 function PatientDetails() {
   const location = useLocation();
+  const navigate = useNavigate();
   const patient = location.state?.patient || {
-    name: "Sophia Clark",
-    age: 32,
-    gender: "Female",
-    contact: "+1-555-123-4567",
-    language: "English",
-    symptoms: "Fever, cough, fatigue",
-    bloodType: "O+",
-    bloodPressure: "120/80 mmHg",
-    bloodSugar: "90 mg/dL",
-    weight: "65 kg",
-    height: "170 cm",
+    name: "",
+    age: 0,
+    gender: "",
+    contact: "",
+    language: "",
+    symptoms: "",
+    bloodType: "",
+    bloodPressure: "",
+    bloodSugar: "",
+    weight: "",
+    height: "",
   };
   const [editMode, setEditMode] = useState(false);
   const [form, setForm] = useState(patient);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSave = (e) => {
+  async function handleSave(e) {
     e.preventDefault();
-    // TODO: connect with backend API
-    alert("Patient details updated!");
-    setEditMode(false);
+    setLoading(true);
+    const date = new Date();
+    const updateData = {
+      name: form.name,
+      age: form.age,
+      gender: form.gender,
+      contactNumber: form.contact,
+      initialSymptoms: form.symptoms,
+      language: form.language,
+      bloodType: form.bloodType,
+      bloodPressure: form.bloodPressure,
+      bloodSugar: form.bloodSugar,
+      weight: form.weight,
+      updateTime: `${date.toLocaleString()}`,
+      height: form.height,
+      updatedAt: date.toLocaleDateString()
+    };
+
+    try {
+      const response = await fetch(`http://localhost:3333/patient/updatepatient/${patient._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert("Patient details updated successfully!");
+        setForm(result.patient || form); // Update form with response data
+        setEditMode(false);
+      } else {
+        alert(result.message || "Failed to update patient details.");
+      }
+    } catch (error) {
+      console.error("Error updating patient details:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

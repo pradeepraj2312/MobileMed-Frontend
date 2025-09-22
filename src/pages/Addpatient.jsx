@@ -146,7 +146,7 @@ const AddPatientForm = () => {
 
         <div className="form-row">
           <div className="form-group">
-            <label className="form-label" htmlFor="temperature">Temperature (°C)</label>
+            <label className="form-label" htmlFor="temperature">Temperature (°F)</label>
             <input
               type="number"
               id="temperature"

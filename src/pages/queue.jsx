@@ -57,7 +57,7 @@ function QueueManagement() {
             <tr key={p._id}>
               <td>{p.name}</td>
               <td>{p._id}</td>
-              <td>{p.updatedAt}</td>
+              <td>{p.updateTime}</td>
               <td>
                 {manageMode ? (
                   <>

@@ -36,7 +36,7 @@ const RecordVitals = () => {
         break;
     }
   };
-
+  var date = new Date();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -46,8 +46,9 @@ const RecordVitals = () => {
       bloodPressure,
       bloodSugar,
       weight,
+      time : `${date.toLocaleString()}`,
       height,
-      updatedAt
+      updatedAt : date.toLocaleDateString()
     };
 
     try {

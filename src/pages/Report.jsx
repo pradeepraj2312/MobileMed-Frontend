@@ -19,7 +19,6 @@ const Report = () => {
   //   frequency: "",
   //   duration: "",
   // });
-  const [name, setName] = useState("")
   const [dateOfVisit, setDateOfVisit] = useState("")
   const [initialSymptoms, setInitialSymptoms ] = useState("")
   const [diagnosis,setDiagnosis] = useState("")
@@ -30,9 +29,6 @@ const Report = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
-      case "name":
-        setName(value);
-        break;
       case "dateOfVisit":
         setDateOfVisit(value);
         break;
@@ -63,7 +59,7 @@ const Report = () => {
   e.preventDefault();
 
   const formData = {
-    name,
+    name: patient ? patient.name : "",
     dateOfVisit,
     initialSymptoms,
     diagnosis,
