@@ -1,106 +1,132 @@
-import React, { useContext } from 'react';
-
-import { 
-  FaClock, 
-  FaMapMarkerAlt, 
-  FaUserInjured, 
-  FaUserPlus, 
-  FaHeartbeat, 
-  FaTasks,
-  FaCalendarDay
-} from 'react-icons/fa';
-import { UserContext } from '../context/UserContext';
-// import './Dashboard.css';
+import React from 'react';
+import { FaUserMd, FaUserFriends, FaCalendarCheck } from 'react-icons/fa';
+import './StyleSheet/admindashboard.css';
 
 function AdminDashboard() {
-    const {user} = useContext(UserContext);
-    
-    
+  const today = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
   return (
-    <div className="worker-dashboard">
-      <header className="dashboard-header">
-        <h1>{user && user.userRole ? `${user.userRole} Dashboard` : "Dashboard"}</h1>
-        <p className="welcome-message">
-          {user && user.userName
-            ? `Welcome back, Dr. ${user.userName}`
-            : "Welcome back"}
-        </p>
-      </header>
+    <div className="admin-page">
+      <div className="admin-layout">
+        <div className="admin-main-content">
+          <div className="admin-header-row">
+            <div>
+              <h1 className="admin-title">Admin Dashboard</h1>
+              <div className="admin-date">
+                Today's Date: <span className="admin-date-value">{today}</span>
+              </div>
+            </div>
+          </div>
 
-      <section className="today-overview">
-        <h2>Today's Overview</h2>
-        <div className="overview-cards">
-          <div className="overview-card">
-            <div className="card-icon">
-              <FaClock />
+          <div className="admin-content-row">
+            <div className="admin-content-main">
+              <div className="admin-card">
+                <h2 className="admin-card-title">Staff Overview</h2>
+                <div className="admin-daily-list">
+                  <div className="admin-daily-item">
+                    <span>Available Doctors</span>
+                    <span className="admin-daily-icon"><FaUserMd /></span>
+                    <span className="admin-daily-value">58</span>
+                  </div>
+                  <div className="admin-daily-item">
+                    <span>Available Workers</span>
+                    <span className="admin-daily-icon"><FaUserFriends /></span>
+                    <span className="admin-daily-value">210</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="admin-card">
+                <div className="admin-card-header-row">
+                  <h2 className="admin-card-title">Upcoming Visit Scheduling</h2>
+                  <button className="admin-schedule-btn">
+                    <FaCalendarCheck style={{ marginRight: '6px' }} />
+                    Schedule a Visit
+                  </button>
+                </div>
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Location/Village</th>
+                      <th>Visit Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Kapsabet</td>
+                      <td>28 July, 2023</td>
+                      <td><span className="admin-status scheduled">Scheduled</span></td>
+                    </tr>
+                    <tr>
+                      <td>Eldoret</td>
+                      <td>29 July, 2023</td>
+                      <td><span className="admin-status scheduled">Scheduled</span></td>
+                    </tr>
+                    <tr>
+                      <td>Nandi Hills</td>
+                      <td>30 July, 2023</td>
+                      <td><span className="admin-status pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                      <td>Iten</td>
+                      <td>01 Aug, 2023</td>
+                      <td><span className="admin-status scheduled">Scheduled</span></td>
+                    </tr>
+                    <tr>
+                      <td>Kapsabet</td>
+                      <td>02 Aug, 2023</td>
+                      <td><span className="admin-status scheduled">Scheduled</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div className="card-content">
-              <h3>Duty Time</h3>
-              <p>8:00 AM - 5:00 PM</p>
-            </div>
-          </div>
-          
-          <div className="overview-card">
-            <div className="card-icon">
-              <FaMapMarkerAlt />
-            </div>
-            <div className="card-content">
-              <h3>Current Location</h3>
-              <p>Camp Alpha</p>
-            </div>
-          </div>
-          
-          <div className="overview-card">
-            <div className="card-icon">
-              <FaUserInjured />
-            </div>
-            <div className="card-content">
-              <h3>Patients Seen</h3>
-              <p>25</p>
+
+            <div className="admin-content-side">
+              <div className="admin-card">
+                <h2 className="admin-card-title">Quick Summary</h2>
+                <div className="admin-daily-list">
+                  <div className="admin-daily-item">
+                    <span>Visits Scheduled</span>
+                    <span className="admin-daily-icon"><FaCalendarCheck /></span>
+                    <span className="admin-daily-value">4</span>
+                  </div>
+                  <div className="admin-daily-item">
+                    <span>Pending Approvals</span>
+                    <span className="admin-daily-icon"><FaUserFriends /></span>
+                    <span className="admin-daily-value">1</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="admin-card admin-route-details">
+                <h2 className="admin-card-title">Route Details</h2>
+                <div className="admin-route-section">
+                  <div className="admin-route-label">Next Visit</div>
+                  <div className="admin-route-box">
+                    <div className="admin-route-location">Nandi Hills</div>
+                    <div className="admin-route-time">ETA: 30 July, 2023</div>
+                  </div>
+                </div>
+                <div className="admin-route-section">
+                  <div className="admin-route-label">Last Visit</div>
+                  <div className="admin-route-box">
+                    <div className="admin-route-location">Eldoret</div>
+                    <div className="admin-route-time">Completed: 29 July, 2023</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="tasks-section">
-        <h2>Tasks</h2>
-        <div className="tasks-list">
-          <div className="task-item">
-            <div className="task-icon">
-              <FaUserPlus />
-            </div>
-            <div className="task-details">
-              <h3>Add New Patients</h3>
-              <p>10:00 AM - 12:00 PM</p>
-            </div>
-            <div className="task-status pending">Pending</div>
-          </div>
-          
-          <div className="task-item">
-            <div className="task-icon">
-              <FaHeartbeat />
-            </div>
-            <div className="task-details">
-              <h3>Check Vital Signs</h3>
-              <p>1:00 PM - 2:00 PM</p>
-            </div>
-            <div className="task-status in-progress">In Progress</div>
-          </div>
-          
-          <div className="task-item">
-            <div className="task-icon">
-              <FaTasks />
-            </div>
-            <div className="task-details">
-              <h3>Queue Management</h3>
-              <p>All Day</p>
-            </div>
-            <div className="task-status completed">Completed</div>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   );
-};
+}
 
 export default AdminDashboard;

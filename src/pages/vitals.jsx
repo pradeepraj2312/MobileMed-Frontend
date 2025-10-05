@@ -41,7 +41,7 @@ const Vitals = () => {
             {patients.map((patient) => (
               <tr key={patient._id}>
                 <td>{patient.name}</td>
-                <td>{patient.id}</td>
+                <td>{patient.patientId}</td>
                 <td>{patient.time}</td>
                 <td>{patient.addedBy}</td>
                 <td>

@@ -46,7 +46,7 @@ const RecordVitals = () => {
       bloodPressure,
       bloodSugar,
       weight,
-      time : `${date.toLocaleString()}`,
+      updateTime : `${date.toLocaleString()}`,
       height,
       updatedAt : date.toLocaleDateString()
     };

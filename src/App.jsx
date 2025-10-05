@@ -20,6 +20,7 @@ import PatientDetailsList from './pages/PatientDetailsList';
 import Report from './pages/Report';
 import './frame.css'
 import DoctorSidebar from './components/DoctorSidebar';
+import AdminSidebar from './components/adminSidebar';
 function AppLayout() {
   const location = useLocation();
 
@@ -37,9 +38,13 @@ function AppLayout() {
   const doctorBar = [
     '/doctordashboard',
     '/patientdetails'
-  ]
+  ];
+  const adminBar = [
+    '/admindashboard',
+  ];
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
-  const shouldShowNavbar = doctorBar.includes(location.pathname) ;
+  const shouldShowDoctorSidebar = doctorBar.includes(location.pathname);
+  const shouldShowAdminSidebar = adminBar.includes(location.pathname);
   const simpleRoutes = ["/", "/landing", "/landing/login", "/landing/signup"];
   const isSimple = simpleRoutes.includes(location.pathname);
   return (
@@ -55,7 +60,8 @@ function AppLayout() {
     ) : (
       <div className="app">
         {!shouldHideNavbar && <Navbar />}
-        {shouldShowNavbar && <DoctorSidebar/>}
+        {shouldShowDoctorSidebar && <DoctorSidebar/>}
+        {shouldShowAdminSidebar && <AdminSidebar/>}
         <div className="app-content">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>

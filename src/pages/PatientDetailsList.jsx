@@ -24,6 +24,10 @@ const PatientDetailsList = () => {
       )
     : [];
 
+  const handleViewDetails = (patient) => {
+    navigate('/view-patient-details', { state: { patient } });
+  };
+
   return (
     <div className="dashboard-page">
      
@@ -44,18 +48,47 @@ const PatientDetailsList = () => {
               <tr>
                 <th>Patient Name</th>
                 <th>Patient ID</th>
-                <th>Report</th>
+                <th>Added Time</th>
+                <th>Added Date</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredPatients.map((patient, idx) => (
                 <tr key={patient._id}>
                   <td>{patient.name}</td>
-                  <td>{patient._id}</td>
+                  <td>{patient.patientId}</td>
+                  <td>{patient.time}</td>
+                  <td>{patient.date}</td>
                   <td>
+                    <button
+                      className="details-btn"
+                      onClick={() => handleViewDetails(patient)}
+                      style={{
+                        background: '#007bff',
+                        color: 'white',
+                        border: 'none',
+                        padding: '6px 12px',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        marginRight: '5px',
+                        fontSize: '12px'
+                      }}
+                    >
+                      View Details
+                    </button>
                     <button
                       className="report-btn"
                       onClick={() => navigate(`/report?id=${patient._id}`)}
+                      style={{
+                        background: '#28a745',
+                        color: 'white',
+                        border: 'none',
+                        padding: '6px 12px',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        fontSize: '12px'
+                      }}
                     >
                       Report
                     </button>

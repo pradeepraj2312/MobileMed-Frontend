@@ -1,0 +1,193 @@
+/* Layout */
+.admin-page {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.admin-main-content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Header */
+.admin-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.admin-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.admin-date {
+  font-size: 16px;
+  color: #7f8c8d;
+}
+
+.admin-date-value {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+/* Content Rows */
+.admin-content-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.admin-content-main {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-content-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cards */
+.admin-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 20px;
+}
+
+.admin-card-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.admin-card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Button */
+.admin-schedule-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Table */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Status Tags */
+.admin-status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.admin-status.scheduled {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.admin-status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* Daily Summary */
+.admin-daily-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-daily-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ecf0f1;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.admin-daily-icon {
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+.admin-daily-value {
+  font-weight: bold;
+  color: #27ae60;
+}
+
+/* Route Details */
+.admin-route-section {
+  margin-bottom: 20px;
+}
+
+.admin-route-label {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-bottom: 6px;
+}
+
+.admin-route-box {
+  background-color: #f0f3f4;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.admin-route-location {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.admin-route-time {
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-content-row {
+    flex-direction: column;
+  }
+
+  .admin-schedule-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
