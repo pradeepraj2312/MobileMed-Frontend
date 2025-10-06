@@ -21,6 +21,7 @@ import Report from './pages/Report';
 import './frame.css'
 import DoctorSidebar from './components/DoctorSidebar';
 import AdminSidebar from './components/adminSidebar';
+import Workers from './pages/workers';
 function AppLayout() {
   const location = useLocation();
 
@@ -41,6 +42,7 @@ function AppLayout() {
   ];
   const adminBar = [
     '/admindashboard',
+    '/workers'
   ];
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
   const shouldShowDoctorSidebar = doctorBar.includes(location.pathname);
@@ -71,7 +73,7 @@ function AppLayout() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/queue" element={<Queue />} />
               <Route path="/vitals" element={<Vitals />} />
-              
+              <Route path="/workers" element={<Workers/>}/>
               <Route path="/patients" element={<AddPatientForm />} />
               <Route path="/report" element={<Report />} />
               <Route path="/recordvitals" element={<RecordVitals />} />

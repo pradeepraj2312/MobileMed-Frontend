@@ -53,75 +53,20 @@ function AdminDashboard() {
                     <tr>
                       <th>Location/Village</th>
                       <th>Visit Date</th>
-                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Kapsabet</td>
-                      <td>28 July, 2023</td>
-                      <td><span className="admin-status scheduled">Scheduled</span></td>
-                    </tr>
-                    <tr>
-                      <td>Eldoret</td>
-                      <td>29 July, 2023</td>
-                      <td><span className="admin-status scheduled">Scheduled</span></td>
-                    </tr>
-                    <tr>
-                      <td>Nandi Hills</td>
-                      <td>30 July, 2023</td>
-                      <td><span className="admin-status pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                      <td>Iten</td>
-                      <td>01 Aug, 2023</td>
-                      <td><span className="admin-status scheduled">Scheduled</span></td>
-                    </tr>
-                    <tr>
-                      <td>Kapsabet</td>
-                      <td>02 Aug, 2023</td>
-                      <td><span className="admin-status scheduled">Scheduled</span></td>
-                    </tr>
+                    <tr><td>Kapsabet</td><td>28 July, 2023</td></tr>
+                    <tr><td>Eldoret</td><td>29 July, 2023</td></tr>
+                    <tr><td>Nandi Hills</td><td>30 July, 2023</td></tr>
+                    <tr><td>Iten</td><td>01 Aug, 2023</td></tr>
+                    <tr><td>Kapsabet</td><td>02 Aug, 2023</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
 
-            <div className="admin-content-side">
-              <div className="admin-card">
-                <h2 className="admin-card-title">Quick Summary</h2>
-                <div className="admin-daily-list">
-                  <div className="admin-daily-item">
-                    <span>Visits Scheduled</span>
-                    <span className="admin-daily-icon"><FaCalendarCheck /></span>
-                    <span className="admin-daily-value">4</span>
-                  </div>
-                  <div className="admin-daily-item">
-                    <span>Pending Approvals</span>
-                    <span className="admin-daily-icon"><FaUserFriends /></span>
-                    <span className="admin-daily-value">1</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="admin-card admin-route-details">
-                <h2 className="admin-card-title">Route Details</h2>
-                <div className="admin-route-section">
-                  <div className="admin-route-label">Next Visit</div>
-                  <div className="admin-route-box">
-                    <div className="admin-route-location">Nandi Hills</div>
-                    <div className="admin-route-time">ETA: 30 July, 2023</div>
-                  </div>
-                </div>
-                <div className="admin-route-section">
-                  <div className="admin-route-label">Last Visit</div>
-                  <div className="admin-route-box">
-                    <div className="admin-route-location">Eldoret</div>
-                    <div className="admin-route-time">Completed: 29 July, 2023</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

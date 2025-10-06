@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usePatients } from "../context/usePatients";
-
 function PatientDetails() {
   const location = useLocation();
   const navigate = useNavigate();
   const _id = location.state?.patient?._id;
   const { patients, loading: patientsLoading } = usePatients();
-
   const [patient, setPatient] = useState(null);
   const [form, setForm] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     if (!_id) {
       alert("No patient ID provided. Please go back to the queue.");
       navigate("/queue");
       return;
     }
-
     if (!patientsLoading && patients.length > 0) {
       const foundPatient = patients.find(p => p._id === _id);
       if (foundPatient) {
@@ -43,7 +39,6 @@ function PatientDetails() {
       }
     }
   }, [_id, navigate, patients, patientsLoading]);
-
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
