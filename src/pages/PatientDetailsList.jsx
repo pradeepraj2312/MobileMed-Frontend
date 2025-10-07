@@ -25,7 +25,7 @@ const PatientDetailsList = () => {
     : [];
 
   const handleViewDetails = (patient) => {
-    navigate('/view-patient-details', { state: { patient } });
+    navigate('/details', { state: { patient } });
   };
 
   return (

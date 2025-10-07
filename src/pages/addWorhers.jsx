@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 function AddWorker() {
   const [formData, setFormData] = useState({
- 
     name: "",
     workerId: "",
     dob: "",
@@ -10,7 +9,6 @@ function AddWorker() {
     nationality: "",
     photo: null,
 
-   
     phone: "",
     email: "",
     address: "",
@@ -25,7 +23,7 @@ function AddWorker() {
     licenseNumber: "",
     licenseValidity: "",
     councilRegistration: "",
-
+    
     vaccinationStatus: [],
     allergies: "",
     medicalFitnessCertificate: null,
@@ -34,7 +32,6 @@ function AddWorker() {
     preferredShift: "",
     transportRequired: false,
   });
-
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
     if (type === "checkbox" && name !== "vaccinationStatus") {
@@ -45,7 +42,6 @@ function AddWorker() {
       setFormData({ ...formData, [name]: value });
     }
   };
-
   const handleVaccinationChange = (e) => {
     const value = e.target.value;
     setFormData((prev) => {
@@ -57,12 +53,10 @@ function AddWorker() {
       }
     });
   };
-
   const handleSave = () => {
     console.log("Saved Worker:", formData);
     alert("Worker saved successfully!");
   };
-
   const handleSaveAndAddAnother = () => {
     console.log("Saved Worker:", formData);
     alert("Worker saved! Add another one.");
@@ -93,10 +87,8 @@ function AddWorker() {
       transportRequired: false,
     });
   };
-
   return (
     <div className="admin-layout">
-
       <div className="main-content">
         <h2>Register Health Worker</h2>
         <div className="form-card">
@@ -324,7 +316,6 @@ function AddWorker() {
               />
             </div>
           </div>
-
           <h3>Employment & Availability</h3>
           <div className="form-row">
             <div className="form-group">
@@ -362,8 +353,6 @@ function AddWorker() {
               </label>
             </div>
           </div>
-
-
           <div className="form-buttons">
             <button
               className="secondary-btn"

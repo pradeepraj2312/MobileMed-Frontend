@@ -58,7 +58,7 @@ function Navbar() {
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   const menuItems = [
-    { id: 'Dashboard', icon: <FaThLarge />, label: 'Dashboard', path: '/dashboard' },
+    { id: 'Dashboard', icon: <FaThLarge />, label: 'Dashboard', path: '/workerdashboard' },
     { id: 'Patients', icon: <FaUserInjured />, label: 'Patients', path: '/patients' },
     { id: 'Vitals', icon: <FaHeartbeat />, label: 'Vitals', path: '/vitals' },
     { id: 'Queue', icon: <FaListAlt />, label: 'Queue', path: '/queue' },
