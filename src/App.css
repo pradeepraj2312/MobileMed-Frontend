@@ -1,3 +1,68 @@
+/* Add Doctor Page Styles */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f7f8fa;
+}
+.main-content {
+  flex: 1;
+  padding: 40px 60px;
+}
+.form-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #e5e7eb;
+  padding: 32px 36px;
+  max-width: 700px;
+  margin-top: 32px;
+}
+.form-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.form-group input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  font-size: 15px;
+}
+.form-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+.primary-btn {
+  background: #5b4dfa;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 28px;
+  cursor: pointer;
+}
+.secondary-btn {
+  background: none;
+  border: 1.5px solid #5b4dfa;
+  color: #5b4dfa;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 6px;
+  padding: 10px 28px;
+  cursor: pointer;
+}
 /* Patient Details List Page */
 .patient-details-list-page {
   background: #f7f9fb;
@@ -669,10 +734,10 @@ tr:nth-child(even) {
 /*workers*/
 
 /* Layout */
-.admin-layout {
+/* .admin-layout {
   display: flex;
   min-height: 100vh;
-}
+} */
 
 /* Sidebar already styled */
 .sidebar {

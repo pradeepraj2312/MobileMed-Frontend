@@ -16,7 +16,7 @@ import Settings from './pages/settings';
 import Admin from './pages/admin';
 import Workers from './pages/workers';
 import AddWorker from "./pages/addworker";
-import AddDoctor from './pages/adddoctor';
+import AddDoctor from './pages/AddDoctor';
 import Doctors from "./pages/doctors";
 import DiseaseAnalytics from "./pages/DiseaseAnalytics";
 import Addpatient from './pages/Addpatient';
