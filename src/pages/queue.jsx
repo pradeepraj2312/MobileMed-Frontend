@@ -32,7 +32,7 @@ function QueueManagement() {
 
   return (
     <div>
-      <Navbar />
+   
       <div className="queue-header">
         <h2>Queue</h2>
         <div className="queue-actions">

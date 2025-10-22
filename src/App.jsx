@@ -24,6 +24,8 @@ import DoctorSidebar from './components/DoctorSidebar';
 import AdminSidebar from './components/adminSidebar';
 import WorkerSidebar from './components/WorkerSidebar';
 import Workers from './pages/workers';
+import AddWorker from './pages/addWorhers';
+import AddDoctor from './pages/addDoctor';
 function AppLayout() {
   const location = useLocation();
 
@@ -53,7 +55,11 @@ function AppLayout() {
   ];
   const adminBar = [
     '/admindashboard',
-    '/workers'
+    '/workers',
+    '/addworker',
+    "/doctors",
+    "/adddoctor",
+
   ];
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
   const shouldShowDoctorSidebar = doctorBar.includes(location.pathname);
@@ -119,9 +125,11 @@ function AppLayout() {
               <Route path="/patients" element={<AddPatientForm />} />
               <Route path="/report" element={<Report />} />
               <Route path="/recordvitals" element={<RecordVitals />} />
-              <Route path="/doctor" element={<Doctor />} />
+              <Route path="/doctors" element={<Doctor />} />
               <Route path="/patientdetails" element={<PatientDetailsList />} />
               <Route path="/details" element={<PatientDetails />} />
+              <Route path='/addworker' element={<AddWorker/>}/>
+              <Route path='/adddoctor' element={<AddDoctor/>}/>
               {/* Redirect routes for backward compatibility */}
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
