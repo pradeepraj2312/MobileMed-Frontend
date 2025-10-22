@@ -1,5 +1,5 @@
 import React from "react";
-import AdminSidebar from "../components/adminSidebar";
+import AdminSidebar from "../components/AdminSidebar";
 import { Doughnut } from "react-chartjs-2";
 import { Download, Filter } from "lucide-react";
 import "../App.css";
