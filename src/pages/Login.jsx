@@ -48,7 +48,7 @@ function Login() {
                 navigate('/workerdashboard')
             }
             if(users.role === "Doctor"){
-                navigate('/doctor')
+                navigate('/doctordashboard')
             }
             if(users.role === "Admin"){
                 navigate('/admindashboard')
