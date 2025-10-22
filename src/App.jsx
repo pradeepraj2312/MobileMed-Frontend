@@ -21,7 +21,7 @@ import PatientDetailsList from './pages/PatientDetailsList';
 import Report from './pages/Report';
 import './frame.css'
 import DoctorSidebar from './components/DoctorSidebar';
-import AdminSidebar from './components/adminSidebar';
+import AdminSidebar from './components/AdminSidebar';
 import WorkerSidebar from './components/WorkerSidebar';
 import Workers from './pages/workers';
 import AddWorker from './pages/addWorhers';
